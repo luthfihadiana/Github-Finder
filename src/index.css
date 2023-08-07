@@ -5,6 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --primary: lightgrey;
 }
 
 *,
@@ -30,4 +31,20 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   padding: 1.6rem;
+}
+
+input {
+  padding: 0.8rem 1.6rem;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04), 0px 2px 6px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  border-radius: 5px;
+  border: 1px solid #dfdede;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--primary);
+  box-shadow: 0px 10px 20px rgba(256, 256, 256, 0.04),
+    0px 2px 6px rgba(256, 256, 256, 0.04), 0px 0px 1px rgba(256, 256, 256, 0.04);
 }
