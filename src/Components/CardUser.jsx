@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import styles from './card.module.css';
+import styles from './Card.module.css';
 
 function CardUser({
   data,
