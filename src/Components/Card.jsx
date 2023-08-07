@@ -4,10 +4,9 @@ import CardUser from "./CardUser";
 function Card({
   data,
   category,
-  key,
 }){
-  if(category === 'user') return <CardUser data={data} key={key}/>
-  return <CardRepo data={data} key={key}/>
+  if(category === 'user') return <CardUser data={data}/>
+  return <CardRepo data={data}/>
 }
 
 export default Card;

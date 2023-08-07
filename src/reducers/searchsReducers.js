@@ -90,7 +90,6 @@ const searchsSlice = createSlice({
         state.data = [
           ...action.payload.items,
         ]
-        console.log(action.payload.items);
         state.total = action.payload.total_count > 1000 ? 1000 : action.payload.total_count;
         state.error = null;
         state.loading = false;
