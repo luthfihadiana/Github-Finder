@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 1.6rem;
+}
+
+.item {
+  width: 100%;
+  max-width: 24rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+
+.button {
+  all: unset;
+  font-size: 1.4rem;
+}
+
+.button:disabled {
+  color: grey;
+}

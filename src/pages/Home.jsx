@@ -4,15 +4,24 @@ import styles from './Home.module.css';
 import { CATEGORY_OPTIONS } from '../constants/options';
 import Card from '../Components/Card';
 import useSearch from '../api/useSearch';
+import Pagination from '../Components/Pagination';
+import LoadingIndicator from '../Components/LoadingIndicator';
+import EmptyState from '../Components/EmptyState';
+import ErrorState from '../Components/ErrorState';
 
 function Home(){
   const [ search, setSearch] = useState('');
-  const [category, setCategory] = useState(CATEGORY_OPTIONS[1]);
-  const {data} = useSearch(search, category.value);
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState(CATEGORY_OPTIONS[0]);
+  const {data, loading, totalPage, error} = useSearch(search, category.value, page);
 
   useEffect(()=>{
     setSearch('');
-  },[category.value])
+  },[category.value]);
+
+  useEffect(()=>{
+    setPage(1);
+  }, [search]);
 
 
   return (
@@ -32,13 +41,30 @@ function Home(){
           onChange={(option) => setCategory(option)}
         />
       </div>
-      <div className={styles.list}>
-        {
-          data.map(el => (
-            <Card key={el.id} category={category.value} data={el}/>
-          ))
-        }
-      </div>
+      {
+        error && <ErrorState error={error}/>}
+      {
+        !data.length && !loading && !error && <EmptyState search={search}/>
+      }
+      {
+        loading ? (
+          <div className={styles.loadingContainer}>
+            <LoadingIndicator/>
+          </div>
+        ) : (
+          <div className={styles.list}>
+            {
+              data.map(el => (
+                <Card key={el.id} category={category.value} data={el}/>
+              ))
+            }
+          </div>
+        )
+      }
+      {
+        totalPage!== 0 && !loading && !error && 
+          <Pagination page={page} setPage={setPage} totalPage={totalPage}/>
+      }
     </>
   );
 }

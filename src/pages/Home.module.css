@@ -89,6 +89,14 @@
   margin-right: 0.8rem;
 }
 
+.loadingContainer {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 1.6rem;
+  height: 30rem;
+}
+
 @media only screen and (max-width: 960px) {
   .list {
     grid-template-columns: repeat(2, 1fr);
