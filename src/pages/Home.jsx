@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import Select from '../Components/Select';
 import styles from './Home.module.css';
 import { CATEGORY_OPTIONS } from '../constants/options';
@@ -8,21 +7,19 @@ import Pagination from '../Components/Pagination';
 import LoadingIndicator from '../Components/LoadingIndicator';
 import EmptyState from '../Components/EmptyState';
 import ErrorState from '../Components/ErrorState';
+import useQueryHooks from '../hooks/useQueryHooks';
 
 function Home(){
-  const [ search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
-  const [category, setCategory] = useState(CATEGORY_OPTIONS[0]);
-  const {data, loading, totalPage, error} = useSearch(search, category.value, page);
+  const {
+    state,
+    setPage,
+    setCategory,
+    setSearch,
+  } = useQueryHooks();
 
-  useEffect(()=>{
-    setSearch('');
-  },[category.value]);
+  const {search, page, category} = state;
 
-  useEffect(()=>{
-    setPage(1);
-  }, [search]);
-
+  const {data, loading, totalPage, error} = useSearch();
 
   return (
     <>

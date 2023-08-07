@@ -12,14 +12,19 @@ function useUserDetails(username){
         return;
       }
       setLoading(true);
-      let res = await octokit.request('GET /users/{username}',{
-        headers:{
-          accept: 'application/vnd.github+json',
-        },
-        username,
-      });
-      setData({...res.data});
-      setLoading(false);
+      try{
+        let res = await octokit.request('GET /users/{username}',{
+          headers:{
+            accept: 'application/vnd.github+json',
+          },
+          username,
+        });
+        setData({...res.data});
+      }catch(e){
+        setData({});
+      }finally{
+        setLoading(false);
+      }
     }
 
     let debounced = debounce(()=>{
@@ -30,7 +35,6 @@ function useUserDetails(username){
 
     return () =>{
       debounced.cancel();
-      console.log('cancelled')
     }
   },[username]);
 

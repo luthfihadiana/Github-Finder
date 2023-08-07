@@ -1,51 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo } from "react";
 import debounce from 'lodash.debounce';
-import { octokit } from "../constants/api";
+import {
+  fetchSearch,
+} from '../reducers/searchsReducers';
 
-function getUrlAPI(category){
-  if(category === 'user') return 'GET /search/users';
-  return 'GET /search/repositories';
-}
-
-function useSearch(search, category, page){
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [total, setTotal] = useState(0);
+function useSearch(){
+  const state = useSelector((state)=> state.searchs);
+  const dispatch = useDispatch();
+  const {
+    page,
+    search,
+    data,
+    error,
+    loading,
+    total,
+  } = state;
 
   useEffect(()=>{
-    const req = async()=>{
-      setLoading(true);
-      try{
-        let res = await octokit.request(getUrlAPI(category),{
-          headers:{
-            accept: 'application/vnd.github+json',
-          },
-          q: search,
-          per_page: 9,
-          page,
-        });
-        setData([...res.data.items]);
-        // setTotal(res.data.total_count > 1000 ? 1000 : res.data.total_count);
-        setTotal(res.data.total_count);
-        setError(null);
-      }catch(e){
-        setError({message: e?.message});
-        setData([]);
-      }finally{
-        setLoading(false);
-      }
-    }
 
     let debounced = debounce(()=>{
-      if(search === ''){
-        setLoading(true);
-        setData([]);
-        setLoading(false);
-        setTotal(0);
-        return;
-      }
-      req();
+      if(search === '')return;
+      dispatch(fetchSearch());
     },500);
 
     debounced();
@@ -53,7 +29,7 @@ function useSearch(search, category, page){
     return () =>{
       debounced.cancel();
     }
-  },[search, category, page]);
+  },[search, dispatch, page]);
 
   const totalPage = useMemo(()=> Math.floor(total/9),[total]);
 

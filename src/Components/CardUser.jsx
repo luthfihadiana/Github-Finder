@@ -1,12 +1,10 @@
 import cx from 'classnames';
 import styles from './card.module.css';
-import useUserDetails from '../api/useUserDetails';
 
 function CardUser({
   data,
 }){
-  const {data:userDetails} = useUserDetails(data?.login);
-  console.log(userDetails);
+  const {userDetails} = data;
   return(
     <div className={styles.card}>
       <div>
