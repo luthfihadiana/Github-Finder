@@ -1,4 +1,4 @@
-import Logo from '../assets/github.svg';
+import Logo from '@/assets/github.svg';
 import styles from './LoadingIndicator.module.css';
 
 export default function LoadingIndicator() {

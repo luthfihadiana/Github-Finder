@@ -9,7 +9,12 @@ function CardRepo({
       <div>
         <div className={styles.titleContainer}>
           <img src={data?.owner?.avatar_url} className={styles.profilePicture}/>
-          <a href={data?.html_url} className={styles.title}>{data?.full_name}</a>
+          <a 
+            href={data?.html_url} 
+            className={styles.title}
+            target="_blank" 
+            rel="noopener noreferrer"
+          >{data?.full_name}</a>
         </div>
         <p className={styles.desc}>
           {data?.description}

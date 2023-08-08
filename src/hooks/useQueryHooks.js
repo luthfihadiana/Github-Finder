@@ -3,10 +3,11 @@ import {
   setSearch as setSearchAction,
   setPage as setPageAction,
   setCategory as setCategoryAction,
-} from '../reducers/searchsReducers';
+} from '../redux/reducers/searchsReducers';
 
 function useQueryHooks(){
   const state = useSelector((state)=> state.searchs);
+  const {page, search, category} = state;
   const dispatch = useDispatch();
 
   const setPage = (val) =>{
@@ -22,7 +23,7 @@ function useQueryHooks(){
   }
 
   return {
-    state,
+    state:{page,search,category},
     setPage,
     setSearch,
     setCategory,

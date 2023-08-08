@@ -1,6 +1,6 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit';
-import { CATEGORY_OPTIONS } from '../constants/options';
-import { octokit } from "../constants/api";
+import { CATEGORY_OPTIONS } from '../../constants/options';
+import { octokit } from "../../constants/api";
 
 const initialState = {
   search: '',
@@ -90,6 +90,7 @@ const searchsSlice = createSlice({
         state.data = [
           ...action.payload.items,
         ]
+        // Available for first 1000, so we restrict until 1000
         state.total = action.payload.total_count > 1000 ? 1000 : action.payload.total_count;
         state.error = null;
         state.loading = false;

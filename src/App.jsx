@@ -2,15 +2,22 @@ import GithubLogo from './assets/github.svg';
 import styles from './App.module.css';
 import {
   createBrowserRouter,
+  Navigate,
   RouterProvider,
 } from "react-router-dom";
-import Home from './pages/Home';
+import{
+  HomePage
+}from './pages';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <HomePage/>,
   },
+  {
+    path: "*",
+    element: <Navigate to="/" replace/>
+  }
 ]);
 
 function App() {

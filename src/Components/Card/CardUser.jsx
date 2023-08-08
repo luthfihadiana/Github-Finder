@@ -5,13 +5,19 @@ function CardUser({
   data,
 }){
   const {userDetails} = data;
+  console.log(userDetails);
   return(
     <div className={styles.card}>
       <div>
         <div className={styles.titleContainer}>
           <img src={data?.avatar_url} className={styles.profilePicture}/>
           <div>
-            <a href="https://picsum.photos/200" className={styles.title}>{data?.login}</a>
+            <a 
+              href={userDetails?.html_url} 
+              className={styles.title}
+              target="_blank" 
+              rel="noopener noreferrer"
+            >{data?.login}</a>
             <p>{userDetails?.name}</p>
           </div>
         </div>

@@ -1,13 +1,15 @@
-import Select from '../Components/Select';
 import styles from './Home.module.css';
-import { CATEGORY_OPTIONS } from '../constants/options';
-import Card from '../Components/Card';
-import useSearch from '../api/useSearch';
-import Pagination from '../Components/Pagination';
-import LoadingIndicator from '../Components/LoadingIndicator';
-import EmptyState from '../Components/EmptyState';
-import ErrorState from '../Components/ErrorState';
-import useQueryHooks from '../hooks/useQueryHooks';
+import { CATEGORY_OPTIONS } from '@/constants/options';
+import useSearch from '@/api/useSearch';
+import{
+  Card,
+  Pagination,
+  LoadingIndicator,
+  EmptyState,
+  ErrorState,
+  Select,
+} from '@/Components';
+import useQueryHooks from '@/hooks/useQueryHooks';
 
 function Home(){
   const {

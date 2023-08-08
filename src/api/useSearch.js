@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import debounce from 'lodash.debounce';
 import {
   fetchSearch,
-} from '../reducers/searchsReducers';
+} from '@/redux/reducers/searchsReducers';
 
 function useSearch(){
   const state = useSelector((state)=> state.searchs);
